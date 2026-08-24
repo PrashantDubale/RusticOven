@@ -1,0 +1,8 @@
+BACKEND 
+cd D:\RusticOven
+.\venv\Scripts\activate
+uvicorn backend.main:app --reload
+
+FRONTEND
+cd D:\RusticOven\frontend
+npm run dev

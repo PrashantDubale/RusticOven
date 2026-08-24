@@ -1,0 +1,40 @@
+# --- Node / Next.js (frontend) ---
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+out/
+frontend/out/
+.turbo/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Python (backend) ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+env/
+
+# --- Environment variables (never commit secrets) ---
+.env
+.env.local
+.env.*.local
+backend/.env
+!*.env.example
+
+# --- OS / Editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Old archived frontend (kept locally, not pushed) ---
+old-streamlit-frontend/
+
+# --- Misc ---
+*.log
+*.zip
+WhatsApp Image 2026-08-15 at 1.03.04 PM.jpeg
