@@ -2,9 +2,10 @@
 
 A full-stack web app for a wood-fired restaurant: a public ordering site for customers and a complete operations dashboard for managers — menu, orders, inventory, staff, purchases, and analytics — all backed by a real database.
 
-<!-- Add 2-3 screenshots here once you have a chance, e.g.: -->
-<!-- ![Homepage](./docs/screenshot-home.png) -->
-<!-- ![Manager Dashboard](./docs/screenshot-dashboard.png) -->
+<!-- Screenshots -->
+![Homepage](./docs/screenshot-home.png)
+![Menu](./docs/screenshot-menu.png)
+![Manager Dashboard](./docs/screenshot-dashboard.png)
 
 ## Live Demo
 
