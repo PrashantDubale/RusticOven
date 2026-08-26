@@ -13,9 +13,14 @@ interactive API doc page from your Pydantic models. This is one of
 the best ways to test your backend before the frontend even exists.
 """
 
+import os
+
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.routes import products, orders, customers, staff, analytics, auth, pantry, offers, reviews, attendance, tables
+
+load_dotenv()
 
 app = FastAPI(title="Cafe Management API")
 
@@ -29,10 +34,10 @@ app = FastAPI(title="Cafe Management API")
 # Method Not Allowed, since no route explicitly handles OPTIONS).
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ],
+    allow_origins=[origin.strip() for origin in os.getenv(
+        "CORS_ORIGINS",
+        "http://localhost:3000,http://127.0.0.1:3000",
+    ).split(",") if origin.strip()],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],  # includes Authorization, used by

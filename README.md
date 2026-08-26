@@ -101,3 +101,55 @@ Runs at `http://localhost:3000`.
 ## License
 
 This project is for portfolio/demonstration purposes.
+
+## Deploying to the Internet
+
+The recommended deployment is Vercel for `frontend/`, Render for `backend/`, and the existing MongoDB Atlas cluster.
+
+### Before deploying
+
+1. Rotate the MongoDB Atlas database password, `JWT_SECRET`, and manager credentials if the values in any local `.env` file have ever been shared.
+2. In MongoDB Atlas, allow the Render service's outbound IPs or use the provider's documented network-access option. Keep database authentication enabled.
+3. Push the repository to GitHub. It already has a remote configured for `PrashantDubale/RusticOven`.
+
+### Backend on Render
+
+Create a Web Service from the repository. Render can use `render.yaml` in the repository root, or configure these values manually:
+
+- Root directory: `.`
+- Build command: `pip install -r backend/requirements.txt`
+- Start command: `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
+
+Set these environment variables in Render:
+
+```text
+MONGO_URI=<rotated MongoDB Atlas connection string>
+DB_NAME=cafe_db
+JWT_SECRET=<long random secret>
+CORS_ORIGINS=https://<your-vercel-project>.vercel.app
+```
+
+Copy the resulting Render URL, for example `https://rustic-oven-api.onrender.com`.
+
+### Frontend on Vercel
+
+Import the GitHub repository into Vercel and set the project root directory to `frontend`. The existing Next.js build settings are sufficient. Add this environment variable before deploying:
+
+```text
+NEXT_PUBLIC_API_URL=https://<your-render-service>.onrender.com
+```
+
+After the first deployment, replace `CORS_ORIGINS` in Render with the exact final Vercel URL and redeploy the backend. Visit the frontend URL and test signup, login, menu loading, checkout, and manager login.
+
+### Demo data
+
+After the backend is live, run the seed scripts once from a local checkout configured with the production `MONGO_URI`:
+
+```bash
+python -m backend.seed_data
+python -m backend.seed_admin
+python -m backend.seed_staff
+python -m backend.seed_tables
+```
+
+Do not run seed scripts against production more than once unless they are idempotent and you have verified the effect.

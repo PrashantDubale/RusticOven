@@ -43,7 +43,7 @@ load_dotenv()
 # it, before you've created a .env file.
 JWT_SECRET = os.getenv("JWT_SECRET", "dev-only-insecure-secret-change-me")
 JWT_ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days
+ACCESS_TOKEN_EXPIRE_MINUTES = 15
 
 
 class UserRole(str, Enum):
