@@ -6,3 +6,6 @@ uvicorn backend.main:app --reload
 FRONTEND
 cd D:\RusticOven\frontend
 npm run dev
+
+taskkill /F /IM python.exe
+taskkill /F /IM node.exe

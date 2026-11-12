@@ -53,7 +53,7 @@ export default function MenuPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">Menu</h1>
-          <p className="text-foreground/60">Browse our complete collection of coffee, pastries, and food items</p>
+          <p className="text-foreground/60">Browse our full menu of wood-fired pizzas, burgers, sandwiches, fries, and drinks.</p>
         </div>
 
         {/* Filters */}
@@ -123,7 +123,7 @@ export default function MenuPage() {
 
         {/* Results Info */}
         <div className="mb-6 text-foreground/60">
-          {filteredProducts.length} items {selectedCategory && `in ${categories.find(c => c.id === selectedCategory)?.label}`}
+          {filteredProducts.length} {filteredProducts.length === 1 ? 'dish' : 'dishes'} {selectedCategory && `in ${selectedCategory}`}
         </div>
 
         {/* Products Grid */}

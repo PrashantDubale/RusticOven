@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { Mail, Phone, MapPin } from 'lucide-react'
 
 // lucide-react no longer ships brand/social icons (Facebook, Instagram,
 // etc. were removed upstream), so these are small hand-drawn SVGs kept
@@ -32,7 +31,7 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4 text-accent">Rustic Oven</h3>
             <p className="text-foreground/60 text-sm">
-              Premium wood-fired pizzas, artisan burgers, and handcrafted food. Order online with imported ingredients and fast delivery.
+              A portfolio demo featuring a sample wood-fired menu, dish photos, and an online ordering flow.
             </p>
           </div>
 
@@ -93,26 +92,7 @@ export function Footer() {
           {/* Contact */}
           <div>
             <h4 className="font-semibold mb-4">Contact Us</h4>
-            <ul className="space-y-3 text-sm">
-              <li className="flex gap-2">
-                <Phone size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                <a href="tel:+919876543210" className="text-foreground/60 hover:text-accent transition-colors">
-                  +91 98765 43210
-                </a>
-              </li>
-              <li className="flex gap-2">
-                <Mail size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                <a href="mailto:hello@brewcafe.com" className="text-foreground/60 hover:text-accent transition-colors">
-                  hello@brewcafe.com
-                </a>
-              </li>
-              <li className="flex gap-2">
-                <MapPin size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                <span className="text-foreground/60">
-                  Mumbai, India
-                </span>
-              </li>
-            </ul>
+            <p className="text-foreground/60 text-sm">Portfolio demo<br />No real orders or contact address</p>
 
             {/* Social icons */}
             <div className="flex gap-3 mt-4">
@@ -137,7 +117,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="border-t border-border mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-foreground/50 text-sm">
-            &copy; 2024 BrewCafe. All rights reserved.
+            &copy; {new Date().getFullYear()} Rustic Oven. Portfolio demo.
           </p>
           <div className="flex gap-6">
             <a href="#" className="text-foreground/50 hover:text-accent transition-colors text-sm">

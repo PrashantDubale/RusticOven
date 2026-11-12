@@ -11,8 +11,8 @@ role, and a bcrypt-hashed password - not a shared passcode anymore.
 Manager accounts are intentionally NOT self-serve signup (anyone
 hitting /auth/signup would otherwise be able to grant themselves
 manager access). They're created directly in the database - see
-backend/seed_admin.py for a ready-to-run example that seeds
-dubale@admin.com.
+backend/seed_admin.py for the secure seed command. It takes the manager
+name, email, and password from environment variables.
 
 Passwords are hashed with bcrypt - never stored or returned in plain
 text. On successful login we issue a short-lived JWT (see

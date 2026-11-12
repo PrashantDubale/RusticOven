@@ -7,6 +7,13 @@ export const metadata = {
   title: 'Rustic Oven - Premium Wood-Fired Pizza & Food',
   description: 'Order artisan pizzas, gourmet burgers, premium sandwiches, and fresh beverages. Wood-fired, made with imported ingredients. Fast delivery with loyalty rewards.',
   generator: 'v0.app',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', type: 'image/x-icon' },
+      { url: '/favicon.png', type: 'image/png', sizes: '64x64' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', type: 'image/png' }],
+  },
 }
 
 export const viewport = {

@@ -31,9 +31,6 @@ Thumbs.db
 .vscode/
 .idea/
 
-# --- Old archived frontend (kept locally, not pushed) ---
-old-streamlit-frontend/
-
 # --- Misc ---
 *.log
 *.zip

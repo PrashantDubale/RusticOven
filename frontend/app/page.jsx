@@ -2,16 +2,16 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { ArrowRight, Star, Truck, Award, MapPin, Phone, Mail, Clock } from 'lucide-react'
+import { ArrowRight, Star, Truck, Award } from 'lucide-react'
 import { getProducts } from '@/services/products'
 import { formatPrice } from '@/lib/utils-cafe'
+import { getProductImage, CATEGORY_IMAGE } from '@/lib/product-images'
 
 export default function Home() {
   // Replaces the static `products` import from lib/mockdata with a
   // real fetch from the backend's /products/ endpoint. Loading state
-  // is intentionally minimal (empty arrays render nothing, same
-  // sections just appear once the fetch resolves) rather than adding
-  // a skeleton/spinner design not present in the original v0 layout.
+  // Keep the menu connected to Atlas while rendering the brand hero
+  // immediately from a local image.
   const [products, setProducts] = useState([])
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function Home() {
       {/* Hero Section - Large Image with Overlay Content */}
       <section className="relative overflow-hidden md:h-[600px] flex items-center justify-center">
         <img
-          src="/images/rustic-pizza-hero.png"
+          src={CATEGORY_IMAGE.pizza}
           alt="Rustic Oven Premium Pizza"
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -83,7 +83,7 @@ export default function Home() {
                 <div className="bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1 cursor-pointer h-full flex flex-col">
                   <div className="relative h-48 overflow-hidden bg-muted">
                     <img 
-                      src="/images/rustic-pizza-hero.png" 
+                      src={getProductImage(product)}
                       alt={product.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform"
                     />
@@ -121,7 +121,7 @@ export default function Home() {
                 <div className="bg-card rounded-lg overflow-hidden shadow hover:shadow-lg transition-all cursor-pointer">
                   <div className="h-40 bg-muted relative">
                     <img 
-                      src="/images/rustic-pizza-hero.png" 
+                      src={getProductImage(product)}
                       alt={product.name}
                       className="w-full h-full object-cover"
                     />
@@ -153,7 +153,7 @@ export default function Home() {
                 <div className="bg-card rounded-lg overflow-hidden shadow hover:shadow-lg transition-all cursor-pointer">
                   <div className="h-40 bg-muted">
                     <img 
-                      src="/images/rustic-burger.png" 
+                      src={getProductImage(product)}
                       alt={product.name}
                       className="w-full h-full object-cover"
                     />
@@ -185,7 +185,7 @@ export default function Home() {
                 <div className="bg-card rounded-lg overflow-hidden shadow hover:shadow-lg transition-all cursor-pointer">
                   <div className="h-40 bg-muted">
                     <img 
-                      src="/images/rustic-sandwich.png" 
+                      src={getProductImage(product)}
                       alt={product.name}
                       className="w-full h-full object-cover"
                     />
@@ -217,7 +217,7 @@ export default function Home() {
                 <div className="bg-card rounded-lg overflow-hidden shadow hover:shadow-lg transition-all cursor-pointer">
                   <div className="h-40 bg-muted">
                     <img 
-                      src="/images/rustic-beverage.png" 
+                      src={getProductImage(product)}
                       alt={product.name}
                       className="w-full h-full object-cover"
                     />
@@ -274,19 +274,18 @@ export default function Home() {
             <div>
               <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">Our Story</h2>
               <p className="text-lg text-foreground/80 mb-4 leading-relaxed">
-                Since 2020, Rustic Oven has been serving the neighborhood fresh, wood-fired
-                pizzas, gourmet burgers, and handcrafted sandwiches made with quality,
-                imported ingredients.
+                Rustic Oven is a portfolio demo for a cozy wood-fired kitchen. Explore a
+                sample menu of pizzas, burgers, sandwiches, fries, and café drinks.
               </p>
               <p className="text-lg text-foreground/80 leading-relaxed">
-                Every dish is prepared to order in our wood-fired kitchen — no shortcuts,
-                just honest food made the right way.
+                The site demonstrates a restaurant menu and ordering flow. Menu prices and
+                availability are sample data; it does not accept real orders.
               </p>
             </div>
             <div className="rounded-xl overflow-hidden shadow-lg h-80">
               <img
                 src="/images/rustic-pizza-hero.png"
-                alt="Inside Rustic Oven kitchen"
+                alt="Rustic Oven wood-fired pizza"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -298,25 +297,22 @@ export default function Home() {
       scrolls here. */}
       <section id="contact" className="py-16 md:py-24 bg-muted scroll-mt-20">
         <div className="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-12 text-center">Get In Touch</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-12 text-center">About This Demo</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-card rounded-xl p-8 text-center shadow">
-              <MapPin size={32} className="mx-auto mb-4 text-accent" />
-              <h3 className="font-bold text-lg mb-2">Visit Us</h3>
-              <p className="text-foreground/70">123 Wood Fire Lane<br />Mumbai, India</p>
+              <Award size={32} className="mx-auto mb-4 text-accent" />
+              <h3 className="font-bold text-lg mb-2">Sample Menu</h3>
+              <p className="text-foreground/70">Browse 22 dishes across five categories.</p>
             </div>
             <div className="bg-card rounded-xl p-8 text-center shadow">
-              <Phone size={32} className="mx-auto mb-4 text-accent" />
-              <h3 className="font-bold text-lg mb-2">Call Us</h3>
-              <p className="text-foreground/70">+91 98765 43210</p>
-              <p className="text-foreground/70 flex items-center justify-center gap-1 mt-1">
-                <Mail size={14} /> hello@rusticoven.com
-              </p>
+              <Truck size={32} className="mx-auto mb-4 text-accent" />
+              <h3 className="font-bold text-lg mb-2">Ordering Flow</h3>
+              <p className="text-foreground/70">Try the demo cart and checkout screens.</p>
             </div>
             <div className="bg-card rounded-xl p-8 text-center shadow">
-              <Clock size={32} className="mx-auto mb-4 text-accent" />
-              <h3 className="font-bold text-lg mb-2">Hours</h3>
-              <p className="text-foreground/70">Mon–Sun: 11:00 AM – 11:00 PM</p>
+              <Star size={32} className="mx-auto mb-4 text-accent" />
+              <h3 className="font-bold text-lg mb-2">Portfolio Project</h3>
+              <p className="text-foreground/70">Menu prices and availability are sample data.</p>
             </div>
           </div>
         </div>
@@ -325,8 +321,8 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-accent">
         <div className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16 text-center text-white">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Eat?</h2>
-          <p className="text-xl mb-8 text-white/95">Browse our full menu and order now for delivery or pickup</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Explore?</h2>
+          <p className="text-xl mb-8 text-white/95">Browse the demo menu and sample ordering experience</p>
           <Link
             href="/menu"
             className="inline-flex items-center justify-center gap-2 px-9 h-[44px] w-auto text-[18px] bg-white text-accent font-bold rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"

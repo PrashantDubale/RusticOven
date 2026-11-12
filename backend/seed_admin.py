@@ -8,28 +8,35 @@ routes/auth.py) - anyone hitting that endpoint could otherwise grant
 themselves manager access. This script is the supported way to create
 one instead.
 
-Safe to run more than once: if the email already exists, it just
-resets that account's password/role/name to the values below instead
-of creating a duplicate.
+Safe to run more than once: if the email already exists, it resets that
+account's password/role/name from the environment instead of creating
+a duplicate. No default production credentials are shipped.
 
-Run it once, from the RusticOven folder:
+Set ADMIN_NAME, ADMIN_EMAIL, and ADMIN_PASSWORD in your shell, then run
+it once from the RusticOven folder:
     python -m backend.seed_admin
-
-To seed a different manager, edit NAME/EMAIL/PASSWORD below (or copy
-this file) and run it again.
 """
 
 import asyncio
+import os
 
 from backend.database import user_collection
 from backend.routes.auth import hash_password
 
-NAME = "Dubale"
-EMAIL = "dubale@admin.com"
-PASSWORD = "Admin@123"
+NAME = os.getenv("ADMIN_NAME", "").strip()
+EMAIL = os.getenv("ADMIN_EMAIL", "").strip()
+PASSWORD = os.getenv("ADMIN_PASSWORD", "")
 
 
 async def seed():
+    missing = [key for key, value in (
+        ("ADMIN_NAME", NAME), ("ADMIN_EMAIL", EMAIL), ("ADMIN_PASSWORD", PASSWORD)
+    ) if not value]
+    if missing:
+        raise SystemExit(f"Set required environment variable(s): {', '.join(missing)}")
+    if len(PASSWORD) < 12:
+        raise SystemExit("ADMIN_PASSWORD must be at least 12 characters long")
+
     doc = {
         "name": NAME,
         "email": EMAIL.lower(),
